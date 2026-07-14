@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Cyvora AI",
+  "description": "AI-powered browser privacy and security extension.",
+  "version": "0.1.0",
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Cyvora AI"
+  },
+
+  "background": {
+    "service_worker": "background/background.js"
+  },
+
+  "permissions": [
+    "storage"
+  ]
+}
