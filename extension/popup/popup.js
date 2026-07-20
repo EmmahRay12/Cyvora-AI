@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const protocol = document.getElementById("protocol");
     const domain = document.getElementById("domain");
     const risk = document.getElementById("risk");
+    const reputation = document.getElementById("reputation");
+    const threatScore = document.getElementById("threatScore");
+const riskCategory = document.getElementById("riskCategory");
+const confidence = document.getElementById("confidence");
+const lastScan = document.getElementById("lastScan");
 
     const reasons = document.getElementById("reasons");
     const trackersList = document.getElementById("trackers");
@@ -27,10 +32,58 @@ document.addEventListener("DOMContentLoaded", async () => {
     domain.textContent = urlObj.hostname;
 
     // ===========================
+    // Website Reputation
+    // ===========================
+
+    const trustedDomains = [
+
+        "google.com",
+        "github.com",
+        "microsoft.com",
+        "apple.com",
+        "amazon.com",
+        "netflix.com",
+        "openai.com",
+        "wikipedia.org",
+        "mozilla.org",
+        "cloudflare.com"
+
+    ];
+
+    let trusted = false;
+
+    trustedDomains.forEach(site => {
+
+        if (
+
+            urlObj.hostname === site ||
+
+            urlObj.hostname.endsWith("." + site)
+
+        ) {
+
+            trusted = true;
+
+        }
+
+    });
+
+    if (trusted) {
+
+        reputation.textContent = "★★★★★ Trusted";
+
+    } else {
+
+        reputation.textContent = "★★☆☆☆ Unknown";
+
+    }
+
+    // ===========================
     // Risk Engine
     // ===========================
 
     let score = 100;
+
     let messages = [];
 
     if (url.startsWith("https://")) {
@@ -40,11 +93,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
 
         score -= 30;
+
         messages.push("❌ Website is NOT using HTTPS");
 
     }
 
     const badDomains = [
+
         ".xyz",
         ".top",
         ".click",
@@ -54,6 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ".tk",
         ".ml",
         ".cf"
+
     ];
 
     badDomains.forEach(tld => {
@@ -61,6 +117,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (urlObj.hostname.endsWith(tld)) {
 
             score -= 20;
+
             messages.push("❌ Suspicious Domain (" + tld + ")");
 
         }
@@ -70,6 +127,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (/^\d+\.\d+\.\d+\.\d+$/.test(urlObj.hostname)) {
 
         score -= 40;
+
         messages.push("❌ Website uses IP Address");
 
     }
@@ -77,6 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (url.length > 120) {
 
         score -= 15;
+
         messages.push("⚠ Very Long URL");
 
     }
@@ -84,6 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (url.includes("@")) {
 
         score -= 20;
+
         messages.push("⚠ URL contains @");
 
     }
@@ -91,11 +151,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (url.includes("//") && url.lastIndexOf("//") > 8) {
 
         score -= 20;
+
         messages.push("⚠ Redirect Pattern Found");
 
     }
 
-    if (score < 0) score = 0;
+    if (score < 0)
+        score = 0;
 
     let status = "🟢 SAFE";
 
@@ -106,12 +168,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         status = "🔴 DANGEROUS";
 
     risk.textContent = `${status} (${score}/100)`;
+    threatScore.textContent = (100 - score) + "%";
+
+if (score >= 90) {
+
+    riskCategory.textContent = "Low";
+
+} else if (score >= 70) {
+
+    riskCategory.textContent = "Medium";
+
+} else {
+
+    riskCategory.textContent = "High";
+
+}
+
+confidence.textContent = score + "%";
+
+lastScan.textContent =
+    new Date().toLocaleString();
 
     reasons.innerHTML = "";
 
     messages.forEach(msg => {
 
         const li = document.createElement("li");
+
         li.textContent = msg;
 
         reasons.appendChild(li);
@@ -133,6 +216,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (chrome.runtime.lastError) {
 
             const li = document.createElement("li");
+
             li.textContent = "Unable to detect trackers";
 
             trackersList.appendChild(li);
@@ -144,6 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!response || response.trackers.length === 0) {
 
             const li = document.createElement("li");
+
             li.textContent = "No Known Trackers";
 
             trackersList.appendChild(li);
@@ -155,6 +240,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         response.trackers.forEach(tracker => {
 
             const li = document.createElement("li");
+
             li.textContent = tracker;
 
             trackersList.appendChild(li);
