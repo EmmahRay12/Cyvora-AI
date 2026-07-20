@@ -2,40 +2,94 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Cyvora AI</title>
 
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet"
+          href="popup.css">
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>🛡️ Cyvora AI</h1>
+    <h1>🛡️ Cyvora AI</h1>
 
-        <p class="status">
-            Protection Active
-        </p>
+    <p class="status">
+        Protection Active
+    </p>
 
-        <div id="result">
+    <hr>
 
-            <p><strong>Current Website</strong></p>
+    <h3>Current Website</h3>
 
-            <p id="website">
-                Not Scanned
-            </p>
+    <p id="website">
+        Not Scanned
+    </p>
 
-        </div>
+    <div class="score-box">
 
-        <button id="scanBtn">
-            Scan Current Website
-        </button>
+        <h2 id="risk">
+
+            Waiting...
+
+        </h2>
 
     </div>
 
-    <script src="popup.js"></script>
+    <div class="info">
+
+        <p>
+            <strong>Protocol:</strong>
+            <span id="protocol">-</span>
+        </p>
+
+        <p>
+            <strong>Domain:</strong>
+            <span id="domain">-</span>
+        </p>
+
+        <p>
+            <strong>AI Confidence:</strong>
+            <span id="confidence">95%</span>
+        </p>
+
+    </div>
+
+    <hr>
+
+    <h3>Security Report</h3>
+
+    <ul id="report">
+
+    </ul>
+
+    <hr>
+
+    <h3>Trackers Detected</h3>
+
+    <ul id="trackers">
+
+        <li>No Scan Yet</li>
+
+    </ul>
+
+    <button id="scanBtn">
+
+        Scan Current Website
+
+    </button>
+
+</div>
+
+<script type="module" src="popup.js"></script>
 
 </body>
+
 </html>

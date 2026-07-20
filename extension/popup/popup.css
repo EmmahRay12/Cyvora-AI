@@ -1,35 +1,115 @@
 body{
-    width:300px;
-    padding:20px;
-    font-family:Arial, sans-serif;
-    background:#111827;
+
+    width:340px;
+
+    background:#0f172a;
+
     color:white;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    margin:0;
+
+    padding:18px;
+
 }
 
 .container{
+
     text-align:center;
+
 }
 
 h1{
-    color:#4CAF50;
+
+    color:#22c55e;
+
 }
 
 .status{
-    margin:15px 0;
-    font-size:16px;
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+}
+
+.score-box{
+
+    margin:20px auto;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    background:#1e293b;
+
+    border:2px solid #334155;
+
+}
+
+.info{
+
+    text-align:left;
+
+    margin-top:15px;
+
+}
+
+.info p{
+
+    margin:8px 0;
+
+}
+
+ul{
+
+    text-align:left;
+
+    padding-left:20px;
+
+}
+
+li{
+
+    margin-bottom:8px;
+
 }
 
 button{
+
+    margin-top:18px;
+
     width:100%;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-    background:#4CAF50;
+
+    padding:12px;
+
+    background:#22c55e;
+
     color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
 }
 
 button:hover{
-    opacity:0.9;
+
+    opacity:.9;
+
+}
+
+hr{
+
+    border:1px solid #334155;
+
+    margin:18px 0;
+
 }
